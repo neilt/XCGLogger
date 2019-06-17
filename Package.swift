@@ -10,7 +10,7 @@ let package = Package(
         .library(
             name: "XCGLogger",
             targets: ["XCGLogger"]),
-#if !os(linux)
+#if !os(Linux)
         .library(
             name: "ObjcExceptionBridging",
             targets: ["ObjcExceptionBridging"]),
@@ -26,14 +26,14 @@ let package = Package(
         .target(
             name: "XCGLogger",
             dependencies: [
-#if !os(linux)
+#if !os(Linux)
             "ObjcExceptionBridging"
 #endif
             ]),
         .testTarget(
             name: "XCGLoggerTests",
             dependencies: ["XCGLogger"]),
-#if !os(linux)
+#if !os(Linux)
         .target(
             name: "ObjcExceptionBridging",
             dependencies: []),
