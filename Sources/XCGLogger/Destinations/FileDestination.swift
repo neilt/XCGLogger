@@ -103,12 +103,21 @@ open class FileDestination: BaseQueuedDestination {
                 if let appendMarker = appendMarker,
                     let encodedData = "\(appendMarker)\n".data(using: String.Encoding.utf8) {
 
+                    #if os(Linux)
+                    do {
+                        try self.logFileHandle?.write(encodedData)
+                    }
+                    catch {
+                        print("Exception occurred: \(error)")
+                    }
+                    #else
                     _try({
                         self.logFileHandle?.write(encodedData)
                     },
                     catch: { (exception: NSException) in
                         print("Objective-C Exception occurred: \(exception)")
                     })
+                    #endif
                 }
             }
         }
@@ -234,12 +243,21 @@ open class FileDestination: BaseQueuedDestination {
     ///
     open override func write(message: String) {
         if let encodedData = "\(message)\n".data(using: String.Encoding.utf8) {
+            #if os(Linux)
+            do {
+                try self.logFileHandle?.write(encodedData)
+            }
+            catch {
+                print("Exception occurred: \(error)")
+            }
+            #else
             _try({
                 self.logFileHandle?.write(encodedData)
             },
             catch: { (exception: NSException) in
                 print("Objective-C Exception occurred: \(exception)")
             })
+            #endif
         }
     }
 }
