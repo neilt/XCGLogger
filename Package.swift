@@ -10,9 +10,11 @@ let package = Package(
         .library(
             name: "XCGLogger",
             targets: ["XCGLogger"]),
+#if !os(linux)
         .library(
             name: "ObjcExceptionBridging",
             targets: ["ObjcExceptionBridging"]),
+#endif
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,12 +25,18 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "XCGLogger",
-            dependencies: ["ObjcExceptionBridging"]),
+            dependencies: [
+#if !os(linux)
+            "ObjcExceptionBridging"
+#endif
+            ]),
         .testTarget(
             name: "XCGLoggerTests",
             dependencies: ["XCGLogger"]),
+#if !os(linux)
         .target(
             name: "ObjcExceptionBridging",
             dependencies: []),
+#endif
     ]
 )
