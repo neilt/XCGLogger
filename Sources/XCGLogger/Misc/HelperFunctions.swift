@@ -18,7 +18,7 @@ func extractTypeName(_ someObject: Any) -> String {
     return (someObject is Any.Type) ? "\(someObject)" : "\(type(of: someObject))"
 }
 
-#if !os(Linux)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(macOS)
 
 import ObjcExceptionBridging
 
