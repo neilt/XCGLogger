@@ -27,8 +27,8 @@ let package = Package(
             exclude: ["../ObjcExceptionBridging", "ObjcExceptionBridging", "Sources/ObjcExceptionBridging"]),
         .testTarget(
             name: "XCGLoggerTests",
-            dependencies: ["XCGLogger"]),
-            exclude: ["../ObjcExceptionBridging", "ObjcExceptionBridging"]),
+            dependencies: ["XCGLogger"],
+            exclude: ["../ObjcExceptionBridging", "ObjcExceptionBridging", "Sources/ObjcExceptionBridging"]),
     ]
 )
 
